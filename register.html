@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="form-box">
+      <h1>Create Account 🚀</h1>
+
+      <!-- Floating Message Boxes -->
+      <div id="message-box" class="message success" style="display:none;">
+        <p>✅ Successfully Registered!</p>
+        <button onclick="goToLogin()" class="btn btn-go">Go to Login Page</button>
+      </div>
+
+      <div id="message-box-error" class="message error" style="display:none;">
+        ❌ Registration failed. Try again.
+      </div>
+
+      <form action="/register" method="post" class="form">
+        <input type="text" name="newUsername" placeholder="New Username" required />
+        <input type="password" name="newPassword" placeholder="New Password" required />
+        <button type="submit" class="btn btn-alt">Register</button>
+      </form>
+
+      <p style="text-align:center; margin-top:10px;">
+        Already have an account? <a href="/">Login here</a>
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    if (params.get('success') === '1') {
+      const box = document.getElementById('message-box');
+      box.style.display = 'flex';
+    }
+
+    if (params.get('error') === '1') {
+      const box = document.getElementById('message-box-error');
+      box.style.display = 'block';
+      setTimeout(() => box.style.opacity = '0', 3000);
+    }
+
+    function goToLogin() {
+      window.location.href = '/';
+    }
+  </script>
+</body>
+</html>
