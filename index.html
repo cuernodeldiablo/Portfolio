@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home - DAVE EVANZ</title>
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="style.css" />
   <style>
     .container {
       padding: 0 20px;
@@ -83,7 +83,7 @@
 <body>
   <div class="container">
     <div class="form-box">
-      <img id="profileImage" src="/uploads/default.png" alt="Profile Image" style="width:100px; border-radius:50%; margin-bottom:10px;" />
+      <img id="profileImage" src="default.png" alt="Profile Image" style="width:100px; border-radius:50%; margin-bottom:10px;" />
       <h1 id="name">Welcome 👋</h1>
 
       <!-- Profile Info Section -->
@@ -102,7 +102,7 @@
         <div id="skillsContainer" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;"></div>
       </div>
 
-      <button onclick="window.location.href='/profile'" class="btn btn-alt" style="margin: 30px 0;">
+      <button onclick="window.location.href='profile.html'" class="btn btn-alt" style="margin: 30px 0;">
         🛠️ Edit Profile
       </button>
 
@@ -126,7 +126,7 @@
   </div>
 
   <script>
-    fetch('/api/user')
+    fetch('api/user.json') // For GitHub Pages, use a static JSON file or mock data
       .then(res => res.json())
       .then(data => {
         document.getElementById('name').textContent = `Welcome back, ${data.name || 'User'} 👋`;
@@ -144,7 +144,7 @@
         });
 
         if (data.imagePath) {
-          document.getElementById('profileImage').src = `/uploads/${data.imagePath}`;
+          document.getElementById('profileImage').src = data.imagePath;
         }
       });
 
@@ -169,7 +169,7 @@
     }
 
     function logout() {
-      window.location.href = '/logout';
+      window.location.href = 'index.html'; // Redirect to homepage or login page
     }
   </script>
 </body>
