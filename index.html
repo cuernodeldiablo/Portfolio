@@ -86,15 +86,14 @@
       <img id="profileImage" src="default.png" alt="Profile Image" style="width:100px; border-radius:50%; margin-bottom:10px;" />
       <h1 id="name">Welcome 👋</h1>
 
-      <!-- Profile Info Section -->
       <div style="margin-bottom: 15px;">
         <h3 style="color: #00ffd5;">🧠 Bio</h3>
-        <p id="bio"></p>
+        <p id="bio">Loading bio...</p>
       </div>
 
       <div style="margin-bottom: 15px;">
         <h3 style="color: #00ffd5;">💬 Motto</h3>
-        <p id="motto" style="font-style: italic;"></p>
+        <p id="motto" style="font-style: italic;">Loading motto...</p>
       </div>
 
       <div style="margin-bottom: 25px;">
@@ -115,38 +114,42 @@
         <div class="category" onclick="showPopup('coding')">💻 Coding</div>
       </div>
 
-      <button onclick="logout()" class="btn btn-alt" style="margin-top:40px;">Logout</button>
+      <button onclick="window.location.href='index.html'" class="btn btn-alt" style="margin-top:40px;">Logout</button>
     </div>
   </div>
 
-  <!-- Floating Popups -->
   <div id="popup" class="popup">
     <div id="popup-content"></div>
     <button onclick="closePopup()">Close</button>
   </div>
 
   <script>
-    fetch('api/user.json') // For GitHub Pages, use a static JSON file or mock data
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById('name').textContent = `Welcome back, ${data.name || 'User'} 👋`;
-        document.getElementById('bio').textContent = data.bio || '';
-        document.getElementById('motto').textContent = data.motto || '';
+    // Replace this with actual data or a static JSON file if needed
+    const data = {
+      name: "Dave Evanz",
+      bio: "Creative thinker, lifelong learner, and code-blooded builder.",
+      motto: "Code like it's 2015.",
+      skills: "HTML, CSS, JavaScript, Node.js",
+      imagePath: "default.png"
+    };
 
-        const skills = data.skills?.split(',').map(s => s.trim()).filter(Boolean);
-        const skillsContainer = document.getElementById('skillsContainer');
-        skillsContainer.innerHTML = '';
-        skills?.forEach(skill => {
-          const tag = document.createElement('div');
-          tag.className = 'tag';
-          tag.textContent = skill;
-          skillsContainer.appendChild(tag);
-        });
+    document.getElementById('name').textContent = `Welcome back, ${data.name} 👋`;
+    document.getElementById('bio').textContent = data.bio;
+    document.getElementById('motto').textContent = data.motto;
 
-        if (data.imagePath) {
-          document.getElementById('profileImage').src = data.imagePath;
-        }
-      });
+    const skills = data.skills.split(',').map(s => s.trim()).filter(Boolean);
+    const skillsContainer = document.getElementById('skillsContainer');
+    skillsContainer.innerHTML = '';
+    skills.forEach(skill => {
+      const tag = document.createElement('div');
+      tag.className = 'tag';
+      tag.textContent = skill;
+      skillsContainer.appendChild(tag);
+    });
+
+    if (data.imagePath) {
+      document.getElementById('profileImage').src = data.imagePath;
+    }
 
     function showPopup(category) {
       const popup = document.getElementById('popup');
@@ -166,10 +169,6 @@
 
     function closePopup() {
       document.getElementById('popup').style.display = 'none';
-    }
-
-    function logout() {
-      window.location.href = 'index.html'; // Redirect to homepage or login page
     }
   </script>
 </body>
